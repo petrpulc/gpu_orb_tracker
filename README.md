@@ -8,7 +8,7 @@ First issue we came across, and that we tackle in this particular repository, is
 
 To this end, we propose a hierarchical approach that estimates a global homography on points of interest (features) in the top layer of Gaussian pyramid and uses this information during extraction of motion vectors in lower levels as an initial estimate of feature position in the incoming frame. Estimation given in lower levels is then based on exact matches from upper layers.
 
-Please go to [wiki](wiki) for more technical information.
+Please go to [wiki](https://github.com/petrpulc/gpu_orb_tracker/wiki) for more technical information.
 
 ## Reference
 
