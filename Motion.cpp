@@ -39,3 +39,13 @@ void Motion::add_frame(const std::vector<cv::KeyPoint> &points, const cv::Mat &d
         layers[i - 1]->pair(layers[i]);
     }
 }
+
+void Motion::show(const cv::Mat &frame) {
+    cv::Mat color;
+    cv::cvtColor(frame,color,cv::COLOR_GRAY2BGR);
+    for (unsigned i = OCTAVES; i > 0; i--) {
+        layers[i]->draw(color);
+    }
+    cv::imshow("Hierarchical",color);
+    cv::waitKey(1);
+}

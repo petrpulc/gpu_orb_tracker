@@ -16,6 +16,8 @@ public:
     ~Motion();
 
     void add_frame(const std::vector<cv::KeyPoint> &points, const cv::Mat &descriptors);
+
+    void show(const cv::Mat &frame);
 };
 
 #endif //GPU_ORB_TRACKER_MOTION_H

@@ -1,5 +1,7 @@
 #include "Feature.h"
 
+cv::RNG rng(123);
+
 Feature::Feature(float *point, const cv::Mat &description) {
     // Relative motion in last frame; zero for new point
     d[0] = 0;
@@ -13,6 +15,8 @@ Feature::Feature(float *point, const cv::Mat &description) {
     desc = description;
     // Assign default uncertainty
     u = UNCERTAINTY;
+
+    color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
 }
 
 void Feature::add_match(const float *point, const cv::Mat &description, const float *upper_estimation) {

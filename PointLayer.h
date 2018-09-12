@@ -47,6 +47,8 @@ public:
     void estimate(float *in, float *out) override;
 
     void pair(Layer *layer_above) override;
+
+    void draw(const cv::Mat &frame) override;
 };
 
 #endif //GPU_ORB_TRACKER_POINTLAYER_H

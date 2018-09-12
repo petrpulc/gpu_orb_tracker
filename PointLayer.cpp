@@ -105,3 +105,14 @@ void PointLayer::estimate(float *in, float *out) {
         out[1] = 0;
     }
 }
+
+void PointLayer::draw(const cv::Mat &frame) {
+    for (auto &i:active) {
+        for (auto h = i.history.begin(), h_end = i.history.end();;) {
+            auto h_old = h++;
+            if (h == h_end) { break; }
+            cv::arrowedLine(frame, h_old->second, h->second,
+                        i.color, 1, cv::LINE_AA, 0, 0.2);
+        }
+    }
+}

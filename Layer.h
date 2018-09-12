@@ -15,6 +15,8 @@ public:
 
     // Pair points with estimation from layer above
     virtual void pair(Layer *layer_above) {};
+
+    virtual void draw(const cv::Mat &frame) {};
 };
 
 #endif //GPU_ORB_TRACKER_LAYER_H

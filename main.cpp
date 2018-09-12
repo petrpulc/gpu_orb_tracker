@@ -50,6 +50,7 @@ int main(int argc, char *argv[]) {
         gpu_desc.download(cpu_desc);
 
         motion.add_frame(points, cpu_desc);
+        motion.show(cpu_gray);
 
         frame_number++;
     }

@@ -18,6 +18,8 @@ struct Feature {
     // ORB descriptor
     cv::Mat desc;
 
+    cv::Scalar color;
+
     Feature(float *point, const cv::Mat &description);
 
     void add_match(const float *point, const cv::Mat &description, const float *upper_estimation);
