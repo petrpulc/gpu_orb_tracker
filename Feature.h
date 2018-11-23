@@ -3,6 +3,7 @@
 
 extern int frame_width;
 extern int frame_number;
+extern int frame_count;
 
 #include <opencv2/opencv.hpp>
 #include <map>
@@ -23,6 +24,8 @@ struct Feature {
     void add_match(const float *point, const cv::Mat &description, const float *upper_estimation);
 
     void no_match(const float *upper_estimation);
+
+    void print();
 };
 
 #endif //GPU_ORB_TRACKER_FEATURE_H

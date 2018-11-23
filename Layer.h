@@ -15,6 +15,8 @@ public:
 
     // Pair points with estimation from layer above
     virtual void pair(Layer *layer_above) {};
+
+    virtual ~Layer() = default;
 };
 
 #endif //GPU_ORB_TRACKER_LAYER_H

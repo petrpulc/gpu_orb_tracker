@@ -5,6 +5,7 @@
 
 int frame_width = 0;
 int frame_number = 0;
+int frame_count = 0;
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
@@ -29,9 +30,10 @@ int main(int argc, char *argv[]) {
 
     // open file on GPU
     cv::Ptr<cv::cudacodec::VideoReader> gpu_reader = cv::cudacodec::createVideoReader(filename);
+    frame_count = gpu_reader.get(CV_CAP_PROP_FRAME_COUNT);
 
     //introduce motion object
-    Motion motion;
+    auto* motion = new Motion();
 
     // main loop
     for (;;) {
@@ -49,10 +51,12 @@ int main(int argc, char *argv[]) {
         // - download descriptors to CPU RAM
         gpu_desc.download(cpu_desc);
 
-        motion.add_frame(points, cpu_desc);
+        motion->add_frame(points, cpu_desc);
 
         frame_number++;
     }
+
+    delete motion;
 
     return 0;
 }

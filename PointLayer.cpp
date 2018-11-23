@@ -29,6 +29,7 @@ void PointLayer::pair(Layer *layer_above) {
 
         // Erase point if uncertainty too high
         if (i->u > MAX_UNCERTAINTY) {
+            i->print();
             active.erase(i++);
             continue;
         }

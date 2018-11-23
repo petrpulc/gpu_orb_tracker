@@ -37,6 +37,10 @@ public:
     }
 
     ~PointLayer() {
+        // Print features active on termination
+        for (auto &feature:active){
+            feature.print();
+        }
         delete new_frame_index;
         delete last_vectors_index;
     }

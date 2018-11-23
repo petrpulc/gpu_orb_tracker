@@ -9,4 +9,6 @@
 #define DELTA_UNCERTAINTY_GOOD 0.99f //Change of uncertainty if match found
 #define DELTA_UNCERTAINTY_BAD 1.1f //Change of uncertainty if no match found
 
+#define STORE_UNCERTAIN true
+
 #endif //GPU_ORB_TRACKER_CONSTS_H
