@@ -44,20 +44,13 @@ void Feature::no_match(const float *upper_estimation) {
 }
 
 void Feature::print() {
-    auto previous = history.find(0);
-    std::map<int, cv::Point2f>::iterator current;
+    std::map<int, cv::Point2f>::iterator frame;
     for (int frame_no = 0; frame_no < frame_count; frame_no++) {
-        current = history.find(frame_no);
-        if (current != history.end() && previous != history.end()) {
-            float delta_x = current->second.x - previous->second.x;
-            float delta_y = current->second.y - previous->second.y;
-            float angle_sin = std::sin(std::atan2(delta_y, delta_x));
-            float delta_length = std::sqrt(delta_x * delta_x + delta_y * delta_y);
-            std::cout << previous->second.x << "," << previous->second.y << "," << angle_sin << "," << delta_length
-                      << ",";
+        frame = history.find(frame_no);
+        if (frame != history.end()) {
+            std::cout << frame->second.x << "," << frame->second.y << ",";
         } else
-            std::cout << ",,,,";
-        previous = current;
+            std::cout << ",,";
     }
     std::cout << std::endl;
 }
