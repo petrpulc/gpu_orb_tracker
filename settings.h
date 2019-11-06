@@ -1,6 +1,7 @@
 #ifndef GPU_ORB_TRACKER_CONSTS_H
 #define GPU_ORB_TRACKER_CONSTS_H
 
+#define CONTRAST 2
 #define OCTAVES 3
 
 #define UNCERTAINTY 0.02f //Default uncertainty for new points
