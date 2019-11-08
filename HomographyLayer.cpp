@@ -1,4 +1,4 @@
-#include <opencv/cv.hpp>
+#include <opencv2/opencv.hpp>
 #include "HomographyLayer.h"
 
 void HomographyLayer::initialize(const std::vector<cv::KeyPoint> &points, const cv::Mat &desc, unsigned int i_start,
