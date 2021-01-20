@@ -17,39 +17,36 @@ int main(int argc, char *argv[]) {
     const std::string filename(argv[1]);
 
     // declare GPU frame storage
-    cv::cuda::GpuMat gpu_frame, gpu_gray;
+    cv::Mat cpu_frame, cpu_gray;
 
     // declare feature point and description storage
     std::vector<cv::KeyPoint> points;
-    cv::cuda::GpuMat gpu_desc;
     cv::Mat cpu_desc;
 
-    // setup GPU-accelerated ORB detector
-    cv::Ptr<cv::cuda::ORB> gpu_detector = cv::cuda::ORB::create(std::stoi(argv[2]), 2.0f, OCTAVES, 31, 0, 2,
-                                                                cv::cuda::ORB::HARRIS_SCORE, 31, 50, true);
+    // setup ORB detector
+    cv::Ptr<cv::ORB> cpu_detector = cv::ORB::create(std::stoi(argv[2]), 2.0f, OCTAVES, 31, 0, 2,
+                                                    cv::ORB::HARRIS_SCORE, 31, 50);
 
-    // open file on GPU
-    cv::Ptr<cv::cudacodec::VideoReader> gpu_reader = cv::cudacodec::createVideoReader(filename);
-    frame_count = gpu_reader.get(CV_CAP_PROP_FRAME_COUNT);
+    // open file on CPU
+    cv::VideoCapture cpu_reader(filename);
+    frame_count = cpu_reader.get(cv::CAP_PROP_FRAME_COUNT);
 
     //introduce motion object
     auto* motion = new Motion();
 
     // main loop
     for (;;) {
-        if (!gpu_reader->nextFrame(gpu_frame))
+        if (!cpu_reader.read(cpu_frame))
             break;
         if (frame_width == 0) {
-            frame_width = gpu_frame.cols;
+            frame_width = cpu_frame.cols;
         }
 
         //for each frame until end of input:
         // - convert to gray scale
-        cv::cuda::cvtColor(gpu_frame, gpu_gray, cv::COLOR_BGRA2GRAY);
+        cv::cvtColor(cpu_frame, cpu_gray, cv::COLOR_BGRA2GRAY);
         // - detect feature points and compute their descriptors
-        gpu_detector->detectAndCompute(gpu_gray, cv::noArray(), points, gpu_desc);
-        // - download descriptors to CPU RAM
-        gpu_desc.download(cpu_desc);
+        cpu_detector->detectAndCompute(cpu_gray, cv::noArray(), points, cpu_desc);
 
         motion->add_frame(points, cpu_desc);
 
